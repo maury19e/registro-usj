@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ListarPersonasController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/personas', [ListarPersonasController::class, 'index']);
+
 Route::get('/home', function () {
     return view('home');
 });
