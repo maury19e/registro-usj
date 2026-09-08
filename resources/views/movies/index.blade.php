@@ -2,6 +2,13 @@
 
 @section('content')
     <div class="space-y-8">
+        <!-- Success Message -->
+        @if(session('success'))
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <p class="text-sm text-green-800 font-medium">✓ {{ session('success') }}</p>
+            </div>
+        @endif
+
         <!-- Add New Movie Section -->
         <div class="bg-white rounded-2xl shadow-sm p-8 border border-slate-100">
             <h2 class="text-lg font-semibold text-slate-900 mb-6 flex items-center gap-2">
@@ -11,7 +18,8 @@
                 Add New Movie
             </h2>
 
-            <form class="space-y-6">
+            <form class="space-y-6" method="POST" action="{{ route('movies.store') }}">
+                @csrf
                 <!-- Title Field -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-slate-700 mb-2">Title</label>
@@ -21,7 +29,6 @@
                         name="title" 
                         placeholder="Enter movie title..." 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        disabled
                     >
                 </div>
 
@@ -34,7 +41,6 @@
                         name="genre" 
                         placeholder="Enter movie genre..." 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        disabled
                     >
                 </div>
 
@@ -47,35 +53,28 @@
                         name="year" 
                         placeholder="YYYY" 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        disabled
                     >
                 </div>
 
                 <!-- Buttons -->
                 <div class="flex gap-4 pt-6">
                     <button 
-                        type="button" 
+                        type="reset" 
                         class="flex items-center gap-2 px-6 py-3 text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition font-medium"
-                        disabled
                     >
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
                         </svg>
-                        Add Movie
+                        Clear
                     </button>
                     <button 
-                        type="button" 
+                        type="submit" 
                         class="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-medium"
-                        disabled
                     >
-                        Save Changes
+                        Add Movie
                     </button>
                 </div>
             </form>
-
-            <p class="text-sm text-slate-500 mt-6 text-center italic">
-                This form is for visual reference. Use the Edit button in the Movies List to edit movies.
-            </p>
         </div>
 
         <!-- Movies List Section -->
@@ -98,7 +97,6 @@
                         type="text" 
                         placeholder="Search movies..." 
                         class="bg-transparent outline-none text-sm text-slate-700 placeholder-slate-400 w-full"
-                        disabled
                     >
                 </div>
             </div>

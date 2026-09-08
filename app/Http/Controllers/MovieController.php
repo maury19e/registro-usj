@@ -90,4 +90,34 @@ class MovieController extends Controller
 
         return redirect()->route('movies.index')->with('success', 'Película actualizada correctamente');
     }
-}
+
+    /**
+     * Guardar una nueva película en la sesión
+     */
+    public function store(Request $request)
+    {
+        $this->initializeMovies();
+        $movies = session('movies');
+
+        // Validar datos
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'genre' => 'required|string|max:100',
+            'year' => 'required|integer|min:1800|max:2100',
+        ]);
+
+        // Generar nuevo ID
+        $newId = max(array_column($movies, 'id')) + 1;
+
+        // Agregar película a la sesión
+        $movies[] = [
+            'id' => $newId,
+            'title' => $validated['title'],
+            'genre' => $validated['genre'],
+            'year' => $validated['year'],
+        ];
+
+        session()->put('movies', $movies);
+
+        return redirect()->route('movies.index')->with('success', 'Película agregada correctamente');
+    }
