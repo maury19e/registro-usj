@@ -85,8 +85,24 @@ class MovieController extends Controller
     {
         $this->initializeMovies();
 
-        // En una aplicación real, aquí se actualizarían los datos en la BD
-        // En este caso, es solo para demostrar el flujo PUT + CSRF + @method
+        $movies = session('movies');
+
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'genre' => 'required|string|max:100',
+            'year' => 'required|integer|min:1800|max:2100',
+        ]);
+
+        foreach ($movies as $index => $movie) {
+            if ((int) $movie['id'] === (int) $id) {
+                $movies[$index]['title'] = $validated['title'];
+                $movies[$index]['genre'] = $validated['genre'];
+                $movies[$index]['year'] = $validated['year'];
+                break;
+            }
+        }
+
+        session()->put('movies', $movies);
 
         return redirect()->route('movies.index')->with('success', 'Película actualizada correctamente');
     }
@@ -121,3 +137,4 @@ class MovieController extends Controller
 
         return redirect()->route('movies.index')->with('success', 'Película agregada correctamente');
     }
+}

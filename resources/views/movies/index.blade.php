@@ -19,7 +19,7 @@
             </h2>
 
             <form class="space-y-6" method="POST" action="{{ route('movies.store') }}">
-                @csrf
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <!-- Title Field -->
                 <div>
                     <label for="title" class="block text-sm font-medium text-slate-700 mb-2">Title</label>

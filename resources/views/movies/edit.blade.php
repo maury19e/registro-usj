@@ -12,8 +12,8 @@
 
             <!-- Edit Form -->
             <form action="{{ route('movies.update', $movie['id']) }}" method="POST" class="space-y-6">
-                @csrf
-                @method('PUT')
+                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="_method" value="PUT">
 
                 <!-- Title Field -->
                 <div>
@@ -25,7 +25,6 @@
                         value="{{ $movie['title'] }}" 
                         placeholder="Enter movie title..." 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        readonly
                     >
                 </div>
 
@@ -39,7 +38,6 @@
                         value="{{ $movie['genre'] }}" 
                         placeholder="Enter movie genre..." 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        readonly
                     >
                 </div>
 
@@ -53,7 +51,6 @@
                         value="{{ $movie['year'] }}" 
                         placeholder="YYYY" 
                         class="w-full border border-slate-200 rounded-lg px-4 py-3 text-slate-700 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
-                        readonly
                     >
                 </div>
 
@@ -79,7 +76,7 @@
                 <!-- Info Note -->
                 <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mt-6">
                     <p class="text-sm text-blue-800">
-                        <strong>Note:</strong> This is a demonstration of the PUT method with @csrf and @method directives. In this exercise, no data is actually persisted to a database.
+                        <strong>Note:</strong> This is a demonstration of the PUT method with CSRF protection and method override. In this exercise, no data is actually persisted to a database.
                     </p>
                 </div>
             </form>
