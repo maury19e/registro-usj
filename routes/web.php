@@ -4,9 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListarPersonasController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\AnimalController;
 Route::get('/', function () {
     return view('welcome');
 });
+//trabajo de animales
+Route::get('/animales', [AnimalController::class, 'index']);
+Route::get('/animales/create', [AnimalController::class, 'create']);
+Route::post('/animales', [AnimalController::class, 'store']);
+Route::get('/animales/{id}/edit', [AnimalController::class, 'edit']);
+Route::put('/animales/{id}', [AnimalController::class, 'update']);
+Route::delete('/animales/{id}', [AnimalController::class, 'destroy']);
+
 Route::get('/personas', [ListarPersonasController::class, 'index']);
 
 Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
