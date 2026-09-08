@@ -3,11 +3,15 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ListarPersonasController;
-
+use App\Http\Controllers\MovieController;
 Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/personas', [ListarPersonasController::class, 'index']);
+
+Route::get('/movies', [MovieController::class, 'index'])->name('movies.index');
+Route::get('/movies/{id}/edit', [MovieController::class, 'edit'])->name('movies.edit');
+Route::put('/movies/{id}', [MovieController::class, 'update'])->name('movies.update');
 
 Route::get('/home', function () {
     return view('home');
