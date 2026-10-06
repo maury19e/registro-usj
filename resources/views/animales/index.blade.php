@@ -15,7 +15,7 @@
         </div>
 
         <a
-            href="/animales/create"
+            href="{{ route('animales.create') }}"
             class="bg-blue-600 text-white px-5 py-3 rounded-lg hover:bg-blue-700"
         >
             Registrar animal
@@ -85,7 +85,7 @@
                             <td class="px-6 py-4 flex gap-3">
 
                                 <a
-                                    href="/animales/{{ $animal['id'] }}/edit"
+                                    href="{{ route('animales.edit', ['id' => $animal['id']]) }}"
                                     class="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
                                 >
                                     Editar
@@ -93,7 +93,7 @@
 
 
                                 <form
-                                    action="/animales/{{ $animal['id'] }}"
+                                    action="{{ route('animales.destroy', ['id' => $animal['id']]) }}"
                                     method="POST"
                                 >
 

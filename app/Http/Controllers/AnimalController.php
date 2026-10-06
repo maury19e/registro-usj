@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\animalDataRequest;
 use Illuminate\Http\Request;
 
 class AnimalController extends Controller
@@ -17,22 +18,22 @@ class AnimalController extends Controller
         return view('animales.create');
     }
 
-    public function store(Request $request)
+    public function store(animalDataRequest $request)
     {
         $animales = session('animales', []);
-
+        $validatedData = $request->validated();
         $nuevoAnimal = [
             'id' => empty($animales) ? 1 : max(array_column($animales, 'id')) + 1,
-            'nombre' => $request->nombre,
-            'especie' => $request->especie,
-            'edad' => $request->edad,
+            'nombre' => $validatedData['nombre'],
+            'especie' => $validatedData['especie'],
+            'edad' => $validatedData['edad'],
         ];
 
         $animales[] = $nuevoAnimal;
 
         session(['animales' => $animales]);
 
-        return redirect('/animales');
+        return redirect()->route('animales.index');
     }
     public function edit($id)
     {
@@ -43,21 +44,21 @@ class AnimalController extends Controller
         return view('animales.edit', compact('animal'));
     }
 
-    public function update(Request $request, $id)
+    public function update(animalDataRequest $request, $id)
     {
         $animales = session('animales', []);
-
+        $validatedData = $request->validated();
         foreach ($animales as &$animal) {
             if ($animal['id'] == $id) {
-                $animal['nombre'] = $request->nombre;
-                $animal['especie'] = $request->especie;
-                $animal['edad'] = $request->edad;
+                $animal['nombre'] = $validatedData['nombre'];
+                $animal['especie'] = $validatedData['especie'];
+                $animal['edad'] = $validatedData['edad'];
             }
         }
 
         session(['animales' => $animales]);
 
-        return redirect('/animales');
+        return redirect()->route('animales.index');
     }
     public function destroy($id)
     {
@@ -69,6 +70,6 @@ class AnimalController extends Controller
 
         session(['animales' => array_values($animales)]);
 
-        return redirect('/animales');
+        return redirect()->route('animales.index');
     }
 }

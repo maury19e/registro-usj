@@ -8,7 +8,7 @@
             Registrar Animal
         </h2>
 
-        <form action="/animales" method="POST" class="space-y-5">
+        <form action="{{ route('animales.store') }}" method="POST" class="space-y-5">
 
             @csrf
 
@@ -65,7 +65,7 @@
                 </button>
 
                 <a
-                    href="/animales"
+                    href="{{ route('animales.index') }}"
                     class="bg-slate-200 text-slate-800 px-5 py-2 rounded-lg hover:bg-slate-300"
                 >
                     Cancelar

@@ -9,7 +9,7 @@
         </h2>
 
         <form
-            action="/animales/{{ $animal['id'] }}"
+            action="{{ route('animales.update', $animal['id']) }}"
             method="POST"
             class="space-y-5"
         >
@@ -73,7 +73,7 @@
                 </button>
 
                 <a
-                    href="/animales"
+                    href="{{ route('animales.index') }}"
                     class="bg-slate-200 text-slate-800 px-5 py-2 rounded-lg hover:bg-slate-300"
                 >
                     Cancelar
