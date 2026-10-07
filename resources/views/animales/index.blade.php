@@ -85,7 +85,7 @@
                             <td class="px-6 py-4 flex gap-3">
 
                                 <a
-                                    href="{{ route('animales.edit', ['id' => $animal['id']]) }}"
+                                    href="{{ route('animales.edit', ['animale' => $animal['id']]) }}"
                                     class="bg-amber-500 text-white px-4 py-2 rounded hover:bg-amber-600"
                                 >
                                     Editar
@@ -93,7 +93,7 @@
 
 
                                 <form
-                                    action="{{ route('animales.destroy', ['id' => $animal['id']]) }}"
+                                    action="{{ route('animales.destroy', ['animale' => $animal['id']]) }}"
                                     method="POST"
                                 >
 

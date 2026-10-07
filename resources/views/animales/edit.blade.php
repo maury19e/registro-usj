@@ -9,7 +9,7 @@
         </h2>
 
         <form
-            action="{{ route('animales.update', $animal['id']) }}"
+            action="{{ route('animales.update', ['animale' => $animal['id']]) }}"
             method="POST"
             class="space-y-5"
         >
