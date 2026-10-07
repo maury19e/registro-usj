@@ -3,7 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-
+use App\Contracts\SpeciesServiceInterface;
+use App\Services\SQLSpeciesService;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            SpeciesServiceInterface::class,
+            SQLSpeciesService::class
+        );
     }
 
     /**
